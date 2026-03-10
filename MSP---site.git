@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSP Technology | Chatbot Inteligente para Imobiliárias</title>
+    <meta name="description" content="Pare de perder vendas por falta de velocidade. Chatbot inteligente para imobiliárias e corretores. Resposta instantânea 24/7.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'outfit': ['Outfit', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'msp-dark': '#0a0e27',
+                        'msp-navy': '#1a1f4b',
+                        'msp-purple': '#6366f1',
+                        'msp-orange': '#f97316',
+                        'msp-gold': '#fbbf24',
+                        'msp-light': '#f8fafc',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #f97316, 0 0 10px #f97316' },
+                            '100%': { boxShadow: '0 0 20px #f97316, 0 0 30px #f97316' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0e27;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #f97316 0%, #fbbf24 50%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f4b 100%);
+            border-radius: 1rem;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #f97316, #6366f1, #fbbf24);
+            border-radius: 1rem;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .glass-effect {
+            background: rgba(26, 31, 75, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-bg {
+            background: radial-gradient(ellipse at top, #1a1f4b 0%, #0a0e27 50%, #0a0e27 100%);
+        }
+
+        .grid-pattern {
+            background-image: linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .chat-bubble {
+            position: relative;
+            background: rgba(26, 31, 75, 0.9);
+            border-radius: 20px;
+            padding: 1rem;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: rgba(26, 31, 75, 0.9) transparent;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(26, 31, 75, 0.8) 0%, rgba(10, 14, 39, 0.9) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(249, 115, 22, 0.5);
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+        }
+
+        .vox-glow {
+            filter: drop-shadow(0 0 30px rgba(249, 115, 22, 0.4));
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0e27;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #f97316, #6366f1);
+            border-radius: 5px;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #f97316;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+            margin: 0 2px;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .video-container {
+            position: relative;
+            background: linear-gradient(135deg, #1a1f4b 0%, #0a0e27 100%);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(249, 115, 22, 0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            background: rgba(26, 31, 75, 0.5);
+            border-radius: 12px;
+            border-bottom: none;
+        }
+
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <img src="/mnt/kimi/upload/Logo secundario.png" alt="MSP Technology" class="h-12 w-auto">
+                    <span class="text-xl font-bold font-outfit hidden sm:block">MSP Technology</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#demonstracao" class="text-gray-300 hover:text-msp-orange transition-colors font-medium">Demonstração</a>
+                    <a href="#funcionalidades" class="text-gray-300 hover:text-msp-orange transition-colors font-medium">Funcionalidades</a>
+                    <a href="#resultados" class="text-gray-300 hover:text-msp-orange transition-colors font-medium">Resultados</a>
+                    <a href="#faq" class="text-gray-300 hover:text-msp-orange transition-colors font-medium">FAQ</a>
+                </div>
+
+                <a href="#contato" class="btn-primary px-6 py-3 rounded-full font-semibold text-white flex items-center gap-2">
+                    <span>Começar Agora</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0 grid-pattern opacity-30"></div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-msp-orange/20 rounded-full blur-xl animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-32 h-32 bg-msp-purple/20 rounded-full blur-xl animate-float" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-msp-orange/10 border border-msp-orange/30 mb-6">
+                        <span class="w-2 h-2 bg-msp-orange rounded-full animate-pulse"></span>
+                        <span class="text-msp-orange text-sm font-semibold">Nova Geração de Atendimento</span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+                        Pare de <span class="gradient-text">queimar dinheiro</span> com contatos que não respondem.
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl text-gray-300 mb-6 font-light">
+                        78% dos contatos compram do <span class="text-msp-orange font-semibold">primeiro que responde</span>. 
+                        Se você não é o primeiro, você já perdeu a venda.
+                    </p>
+                    
+                    <div class="glass-effect p-6 rounded-2xl mb-8 border-l-4 border-msp-orange">
+                        <p class="text-lg italic text-gray-200">
+                            "Um contato respondido em 5 minutos tem <span class="text-msp-gold font-bold">21x mais chance</span> de conversão. 
+                            Você está respondendo em quanto tempo hoje?"
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contato" class="btn-primary px-8 py-4 rounded-full text-lg font-bold text-white flex items-center justify-center gap-3 animate-glow">
+                            <span>Quero parar de perder contatos agora</span>
+                            <i data-lucide="zap" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#demonstracao" class="px-8 py-4 rounded-full text-lg font-semibold border-2 border-msp-purple text-msp-purple hover:bg-msp-purple/10 transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i>
+                            <span>Ver Demonstração</span>
+                        </a>
+                    </div>
+
+                    <div class="mt-8 flex items-center gap-4 text-sm text-gray-400">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-msp-orange flex items-center justify-center text-xs font-bold">JM</div>
+                            <div class="w-8 h-8 rounded-full bg-msp-purple flex items-center justify-center text-xs font-bold">AK</div>
+                            <div class="w-8 h-8 rounded-full bg-msp-gold flex items-center justify-center text-xs font-bold text-black">LS</div>
+                        </div>
+                        <span>+500 corretores já utilizam o Vox</span>
+                    </div>
+                </div>
+                
+                <div class="relative" data-aos="fade-left" data-aos-duration="1000">
+                    <!-- Vox Mascot -->
+                    <div class="relative z-10 animate-float">
+                        <img src="/mnt/kimi/upload/robo mascote VOX SEM FUNDO.png" alt="Vox - Mascote MSP" class="w-full max-w-lg mx-auto vox-glow drop-shadow-2xl">
+                    </div>
+                    
+                    <!-- Chat Simulation -->
+                    <div class="absolute top-10 -left-4 md:left-0 glass-effect p-4 rounded-2xl max-w-xs animate-slide-up" style="animation-delay: 0.5s;">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-msp-orange to-msp-gold flex items-center justify-center">
+                                <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-msp-orange">Vox</span>
+                            <span class="text-xs text-gray-400">agora</span>
+                        </div>
+                        <p class="text-sm text-gray-200">Olá! Vi que você se interessou pelo apartamento no Centro. Posso agendar uma visita para hoje à tarde?</p>
+                    </div>
+
+                    <div class="absolute bottom-20 -right-4 md:right-0 glass-effect p-4 rounded-2xl max-w-xs animate-slide-up" style="animation-delay: 1s;">
+                        <div class="flex items-center gap-2 mb-2 justify-end">
+                            <span class="text-xs text-gray-400">Cliente</span>
+                            <div class="w-8 h-8 rounded-full bg-msp-purple flex items-center justify-center">
+                                <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-200 text-right">Perfeito! Que horas posso passar?</p>
+                        <div class="mt-2 flex justify-end gap-1">
+                            <span class="text-xs text-gray-400">✓✓</span>
+                        </div>
+                    </div>
+
+                    <!-- Stats Badge -->
+                    <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 glass-effect px-6 py-3 rounded-full border border-msp-orange/30">
+                        <div class="flex items-center gap-3">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-msp-orange counter" data-target="21">0</div>
+                                <div class="text-xs text-gray-400">x mais conversões</div>
+                            </div>
+                            <div class="w-px h-8 bg-gray-600"></div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-msp-gold counter" data-target="300">0</div>
+                                <div class="text-xs text-gray-400">% aumento</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demonstration Section -->
+    <section id="demonstracao" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Veja a <span class="gradient-text">Velocidade</span> que Garante a sua Comissão
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Enquanto seu concorrente ainda está digitando "Bom dia", seu Chatbot já qualificou o contato, 
+                    apresentou o imóvel e agendou a visita.
+                </p>
+            </div>
+
+            <div class="video-container aspect-video max-w-5xl mx-auto shadow-2xl border border-msp-purple/30" data-aos="zoom-in">
+                <div class="absolute inset-0 flex items-center justify-center bg-msp-dark/50 backdrop-blur-sm group cursor-pointer" onclick="playVideo()">
+                    <div class="w-20 h-20 rounded-full bg-msp-orange flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-msp-orange/50">
+                        <i data-lucide="play" class="w-8 h-8 text-white ml-1"></i>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-msp-dark to-transparent">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-msp-orange/20 flex items-center justify-center">
+                            <i data-lucide="video" class="w-6 h-6 text-msp-orange"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-white">Demonstração ao Vivo</p>
+                            <p class="text-sm text-gray-400">Veja como o Vox funciona em tempo real</p>
+                        </div>
+                        <div class="ml-auto flex items-center gap-2 text-msp-orange">
+                            <span class="w-2 h-2 bg-msp-orange rounded-full animate-pulse"></span>
+                            <span class="text-sm font-semibold">Assista agora</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Placeholder for video -->
+                <div class="w-full h-full bg-gradient-to-br from-msp-navy to-msp-dark flex items-center justify-center">
+                    <img src="/mnt/kimi/upload/robo mascote VOX SEM FUNDO.png" alt="Preview" class="w-64 opacity-50">
+                </div>
+            </div>
+
+            <!-- Speed Comparison -->
+            <div class="grid md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
+                <div class="glass-effect p-6 rounded-2xl border border-red-500/30" data-aos="fade-right">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                            <i data-lucide="x-circle" class="w-5 h-5 text-red-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-red-400">Sem o Vox</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="clock" class="w-4 h-4"></i>
+                            <span>Resposta em 2-4 horas</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="user-x" class="w-4 h-4"></i>
+                            <span>Cliente já contactou 3 concorrentes</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="trending-down" class="w-4 h-4"></i>
+                            <span>Taxa de conversão: 5%</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-effect p-6 rounded-2xl border border-green-500/30" data-aos="fade-left">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-400">Com o Vox</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="zap" class="w-4 h-4 text-msp-orange"></i>
+                            <span>Resposta em <span class="text-msp-orange font-bold">segundos</span></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="user-check" class="w-4 h-4 text-msp-orange"></i>
+                            <span>Primeiro contato = Primeira venda</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-msp-orange"></i>
+                            <span>Taxa de conversão: <span class="text-msp-orange font-bold">21x maior</span></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Section -->
+    <section class="py-24 bg-msp-navy/30 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23f97316\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div data-aos="fade-up">
+                <div class="inline-block p-4 rounded-full bg-red-500/10 mb-6 animate-pulse-slow">
+                    <i data-lucide="alert-triangle" class="w-12 h-12 text-red-500"></i>
+                </div>
+                
+                <h2 class="text-4xl md:text-6xl font-bold mb-8">
+                    O <span class="text-red-500">cemitério</span> de contatos esquecidos.
+                </h2>
+                
+                <p class="text-2xl md:text-3xl text-gray-300 leading-relaxed font-light">
+                    Enquanto você <span class="text-msp-orange font-semibold">dorme</span>, 
+                    <span class="text-msp-orange font-semibold">dirige</span> ou está em uma 
+                    <span class="text-msp-orange font-semibold">visita</span>, seu próximo cliente está mandando mensagem.
+                </p>
+                
+                <div class="mt-8 p-8 glass-effect rounded-3xl border border-red-500/20 max-w-3xl mx-auto">
+                    <p class="text-xl text-gray-200 mb-4">
+                        Se ele esperar <span class="text-red-400 font-bold text-2xl">10 minutos</span>, 
+                        ele já chamou o seu concorrente.
+                    </p>
+                    <div class="h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent my-4"></div>
+                    <p class="text-lg text-gray-400">
+                        Não é falta de mercado, é <span class="text-white font-semibold">falta de velocidade</span>.
+                    </p>
+                </div>
+
+                <!-- Cemetery Visualization -->
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto opacity-50">
+                    <div class="glass-effect p-4 rounded-lg text-center">
+                        <i data-lucide="message-square" class="w-8 h-8 mx-auto mb-2 text-gray-600"></i>
+                        <p class="text-xs text-gray-500">Não respondido</p>
+                    </div>
+                    <div class="glass-effect p-4 rounded-lg text-center">
+                        <i data-lucide="message-square" class="w-8 h-8 mx-auto mb-2 text-gray-600"></i>
+                        <p class="text-xs text-gray-500">Não respondido</p>
+                    </div>
+                    <div class="glass-effect p-4 rounded-lg text-center">
+                        <i data-lucide="message-square" class="w-8 h-8 mx-auto mb-2 text-gray-600"></i>
+                        <p class="text-xs text-gray-500">Não respondido</p>
+                    </div>
+                    <div class="glass-effect p-4 rounded-lg text-center">
+                        <i data-lucide="message-square" class="w-8 h-8 mx-auto mb-2 text-gray-600"></i>
+                        <p class="text-xs text-gray-500">Não respondido</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="funcionalidades" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-msp-orange font-semibold tracking-wider uppercase text-sm">Funcionalidades Poderosas</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-4">
+                    Tecnologia que <span class="gradient-text">Vende</span>
+                </h2>
+                <p class="text-xl text-gray-400">Cada recurso foi desenvolvido para maximizar suas conversões</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="stat-card p-8 rounded-3xl relative overflow-hidden group" data-aos="fade-up" data-aos-delay="0">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-msp-orange/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-msp-orange to-msp-gold flex items-center justify-center mb-6 shadow-lg shadow-msp-orange/30">
+                            <i data-lucide="target" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Qualificação Cirúrgica</h3>
+                        <p class="text-gray-400 leading-relaxed mb-4">
+                            O bot identifica quem tem crédito aprovado e quem está apenas "olhando", 
+                            entregando apenas o <span class="text-msp-orange font-semibold">"filé mignon"</span> 
+                            para o seu time comercial.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-msp-orange"></i>
+                                <span>Score de qualificação automático</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-msp-orange"></i>
+                                <span>Priorização inteligente de leads</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="stat-card p-8 rounded-3xl relative overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-msp-purple/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-msp-purple to-blue-500 flex items-center justify-center mb-6 shadow-lg shadow-msp-purple/30">
+                            <i data-lucide="clock" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Disponibilidade Implacável</h3>
+                        <p class="text-gray-400 leading-relaxed mb-4">
+                            Atendimento às <span class="text-msp-purple font-semibold">3 da manhã</span> 
+                            de um domingo com a mesma eficiência de uma segunda-feira às 10h. 
+                            Nunca durma sem responder.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-msp-purple"></i>
+                                <span>24/7 sem pausas</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-msp-purple"></i>
+                                <span>Feriados e finais de semana</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="stat-card p-8 rounded-3xl relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-msp-gold/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-msp-gold to-yellow-600 flex items-center justify-center mb-6 shadow-lg shadow-msp-gold/30">
+                            <i data-lucide="calendar-check" class="w-8 h-8 text-msp-dark"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Integração de Agenda</h3>
+                        <p class="text-gray-400 leading-relaxed mb-4">
+                            O bot não apenas conversa; ele <span class="text-msp-gold font-semibold">marca a visita</span> 
+                            no seu calendário sem que você precise tocar no celular.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-msp-gold"></i>
+                                <span>Sincronização automática</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-msp-gold"></i>
+                                <span>Lembretes automáticos</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Features Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                <div class="glass-effect p-6 rounded-2xl text-center hover:border-msp-orange/50 transition-colors border border-transparent" data-aos="zoom-in" data-aos-delay="0">
+                    <i data-lucide="message-circle" class="w-8 h-8 mx-auto mb-3 text-msp-orange"></i>
+                    <h4 class="font-semibold mb-1">WhatsApp Oficial</h4>
+                    <p class="text-xs text-gray-500">API Business integrada</p>
+                </div>
+                <div class="glass-effect p-6 rounded-2xl text-center hover:border-msp-purple/50 transition-colors border border-transparent" data-aos="zoom-in" data-aos-delay="100">
+                    <i data-lucide="brain" class="w-8 h-8 mx-auto mb-3 text-msp-purple"></i>
+                    <h4 class="font-semibold mb-1">IA Avançada</h4>
+                    <p class="text-xs text-gray-500">Processamento de linguagem natural</p>
+                </div>
+                <div class="glass-effect p-6 rounded-2xl text-center hover:border-msp-gold/50 transition-colors border border-transparent" data-aos="zoom-in" data-aos-delay="200">
+                    <i data-lucide="shield-check" class="w-8 h-8 mx-auto mb-3 text-msp-gold"></i>
+                    <h4 class="font-semibold mb-1">LGPD Compliant</h4>
+                    <p class="text-xs text-gray-500">Segurança de dados total</p>
+                </div>
+                <div class="glass-effect p-6 rounded-2xl text-center hover:border-green-500/50 transition-colors border border-transparent" data-aos="zoom-in" data-aos-delay="300">
+                    <i data-lucide="bar-chart-3" class="w-8 h-8 mx-auto mb-3 text-green-500"></i>
+                    <h4 class="font-semibold mb-1">Analytics</h4>
+                    <p class="text-xs text-gray-500">Relatórios detalhados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Results -->
+    <section id="resultados" class="py-24 bg-gradient-to-b from-msp-navy/50 to-msp-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-effect rounded-3xl p-8 md:p-12 border border-msp-orange/20" data-aos="fade-up">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 mb-6">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-green-500"></i>
+                            <span class="text-green-400 text-sm font-semibold">Resultados Comprovados</span>
+                        </div>
+                        
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                            Números que <span class="text-green-400">não mentem</span>
+                        </h2>
+                        
+                        <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                            Corretores que utilizam nossa estratégia de resposta instantânea aumentaram 
+                            sua taxa de conversão em até 
+                            <span class="text-3xl font-bold text-msp-orange">300%</span> 
+                            no primeiro trimestre.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-msp-orange/20 flex items-center justify-center">
+                                    <span class="text-msp-orange font-bold">+</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">500+ Corretores Ativos</p>
+                                    <p class="text-sm text-gray-500">Utilizando o Vox diariamente</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-msp-purple/20 flex items-center justify-center">
+                                    <span class="text-msp-purple font-bold">2M+</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Mensagens Processadas</p>
+                                    <p class="text-sm text-gray-500">No último mês</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="glass-effect p-6 rounded-2xl text-center border border-msp-orange/30">
+                            <div class="text-4xl font-bold text-msp-orange mb-2 counter" data-target="300">0</div>
+                            <div class="text-sm text-gray-400">% Aumento em conversões</div>
+                        </div>
+                        <div class="glass-effect p-6 rounded-2xl text-center border border-msp-purple/30">
+                            <div class="text-4xl font-bold text-msp-purple mb-2 counter" data-target="21">0</div>
+                            <div class="text-sm text-gray-400">x Mais chances de venda</div>
+                        </div>
+                        <div class="glass-effect p-6 rounded-2xl text-center border border-msp-gold/30">
+                            <div class="text-4xl font-bold text-msp-gold mb-2 counter" data-target="5">0</div>
+                            <div class="text-sm text-gray-400">Segundos de resposta</div>
+                        </div>
+                        <div class="glass-effect p-6 rounded-2xl text-center border border-green-500/30">
+                            <div class="text-4xl font-bold text-green-500 mb-2 counter" data-target="78">0</div>
+                            <div class="text-sm text-gray-400">% Fecham no 1º contato</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="mt-16 grid md:grid-cols-3 gap-8">
+                <div class="glass-effect p-6 rounded-2xl border border-gray-700/50" data-aos="fade-up" data-aos-delay="0">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"O Vox mudou minha forma de trabalhar. Deixei de perder contatos à noite e finais de semana. Minha carteira aumentou 40% em 2 meses."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-msp-orange flex items-center justify-center font-bold">RM</div>
+                        <div>
+                            <p class="font-semibold text-sm">Ricardo Mendes</p>
+                            <p class="text-xs text-gray-500">Corretor Autônomo - SP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-effect p-6 rounded-2xl border border-gray-700/50" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Implementamos na imobiliária e reduzimos o tempo de resposta de 3 horas para 30 segundos. O ROI foi imediato."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-msp-purple flex items-center justify-center font-bold">AS</div>
+                        <div>
+                            <p class="font-semibold text-sm">Ana Santos</p>
+                            <p class="text-xs text-gray-500">Diretora Comercial - Imóveis Premium</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-effect p-6 rounded-2xl border border-gray-700/50" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-msp-gold fill-msp-gold"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"A qualificação automática é surreal. Recebo apenas leads realmente interessados, economizando horas de trabalho."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-msp-gold flex items-center justify-center font-bold text-msp-dark">FL</div>
+                        <div>
+                            <p class="font-semibold text-sm">Fernando Lima</p>
+                            <p class="text-xs text-gray-500">Corretor de Alto Padrão - RJ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Tire suas <span class="gradient-text">dúvidas</span>
+                </h2>
+                <p class="text-xl text-gray-400">Tudo que você precisa saber sobre o Vox</p>
+            </div>
+
+            <div class="space-y-4" data-aos="fade-up">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item p-6 cursor-pointer transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold pr-8">O bot parece um robô?</h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-msp-orange transition-transform faq-icon"></i>
+                    </div>
+                    <div class="faq-content hidden mt-4 text-gray-400 leading-relaxed">
+                        Não! Utilizamos processamento de linguagem natural avançado e linguagem humanizada adaptada especificamente ao mercado imobiliário. 
+                        O Vox conversa como um corretor experiente, com empatia e conhecimento técnico.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item p-6 cursor-pointer transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold pr-8">Funciona no meu CRM?</h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-msp-orange transition-transform faq-icon"></i>
+                    </div>
+                    <div class="faq-content hidden mt-4 text-gray-400 leading-relaxed">
+                        Sim! Oferecemos integração total com as principais ferramentas do mercado: Salesforce, HubSpot, Pipedrive, 
+                        Zapier, e diversos CRMs imobiliários específicos. Também disponibilizamos API para integrações customizadas.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item p-6 cursor-pointer transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold pr-8">Quanto tempo leva para implementar?</h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-msp-orange transition-transform faq-icon"></i>
+                    </div>
+                    <div class="faq-content hidden mt-4 text-gray-400 leading-relaxed">
+                        A implementação é rápida! Em até 48 horas seu Vox já está ativo e respondendo. 
+                        Fazemos toda a configuração inicial baseada no seu portfólio de imóveis e processo comercial.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item p-6 cursor-pointer transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold pr-8">Posso personalizar as respostas?</h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-msp-orange transition-transform faq-icon"></i>
+                    </div>
+                    <div class="faq-content hidden mt-4 text-gray-400 leading-relaxed">
+                        Totalmente! Você pode personalizar tom de voz, informações sobre empreendimentos, 
+                        scripts de qualificação e até criar fluxos específicos para diferentes tipos de imóveis.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item p-6 cursor-pointer transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold pr-8">E se o bot não souber responder?</h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-msp-orange transition-transform faq-icon"></i>
+                    </div>
+                    <div class="faq-content hidden mt-4 text-gray-400 leading-relaxed">
+                        O Vox é treinado para reconhecer quando precisa de ajuda humana e faz a transferência 
+                        automática para você ou sua equipe, mantendo todo o histórico da conversa para contexto.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contato" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-msp-orange/20 via-msp-purple/20 to-msp-orange/20"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%23f97316\' fill-opacity=\'0.05\' fill-rule=\'evenodd\'/%3E%3C/svg%3E')] opacity-30"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10" data-aos="zoom-in">
+            <div class="inline-block mb-6 animate-bounce">
+                <img src="/mnt/kimi/upload/robo mascote VOX SEM FUNDO.png" alt="Vox" class="w-24 h-24 mx-auto drop-shadow-2xl">
+            </div>
+            
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                O mercado imobiliário <span class="text-red-500">não perdoa</span> os lentos.
+            </h2>
+            
+            <p class="text-2xl text-gray-300 mb-8">
+                Implemente a qualificação automática hoje.
+            </p>
+
+            <div class="glass-effect p-8 rounded-3xl border border-msp-orange/30 max-w-2xl mx-auto mb-8">
+                <div class="grid md:grid-cols-2 gap-6 text-left">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Nome</label>
+                        <input type="text" class="w-full px-4 py-3 rounded-lg bg-msp-dark/50 border border-gray-700 focus:border-msp-orange focus:outline-none transition-colors" placeholder="Seu nome">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">WhatsApp</label>
+                        <input type="tel" class="w-full px-4 py-3 rounded-lg bg-msp-dark/50 border border-gray-700 focus:border-msp-orange focus:outline-none transition-colors" placeholder="(11) 99999-9999">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-3 rounded-lg bg-msp-dark/50 border border-gray-700 focus:border-msp-orange focus:outline-none transition-colors" placeholder="seu@email.com">
+                    </div>
+                </div>
+                
+                <button class="btn-primary w-full mt-6 py-4 rounded-xl text-lg font-bold text-white flex items-center justify-center gap-3 animate-glow">
+                    <span>COMPRAR AGORA</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+                
+                <p class="mt-4 text-sm text-gray-500">
+                    <i data-lucide="shield-check" class="w-4 h-4 inline mr-1"></i>
+                    Pagamento seguro • Acesso imediato • 7 dias de garantia
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-gray-400">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
+                    <span>Setup gratuito</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
+                    <span>Suporte 24/7</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
+                    <span>Sem contrato de fidelidade</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-msp-dark border-t border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2">
+                    <img src="/mnt/kimi/upload/Logo principal.png" alt="MSP Technology" class="h-16 mb-4">
+                    <p class="text-gray-400 max-w-sm">
+                        Transformando a forma como imobiliárias e corretores se relacionam com seus clientes através de inteligência artificial.
+                    </p>
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-msp-orange/20 transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-msp-orange/20 transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover:bg-msp-orange/20 transition-colors">
+                            <i data-lucide="youtube" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Produto</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#funcionalidades" class="hover:text-msp-orange transition-colors">Funcionalidades</a></li>
+                        <li><a href="#demonstracao" class="hover:text-msp-orange transition-colors">Demonstração</a></li>
+                        <li><a href="#" class="hover:text-msp-orange transition-colors">Preços</a></li>
+                        <li><a href="#" class="hover:text-msp-orange transition-colors">Integrações</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Contato</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                            <span>contato@mspweb.com.br</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4"></i>
+                            <span>(11) 9999-9999</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            <span>São Paulo, SP</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">
+                    © 2024 MSP Technology. Todos os direitos reservados.
+                </p>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.style.background = 'rgba(10, 14, 39, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.style.background = 'rgba(26, 31, 75, 0.6)';
+            }
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(animateCounters, 20);
+                } else {
+                    counter.innerText = target + (target > 100 ? '' : 'x');
+                }
+            });
+        };
+
+        // Trigger counters when in view
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.counter').forEach(counter => {
+            observer.observe(counter.parentElement);
+        });
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const content = element.querySelector('.faq-content');
+            const icon = element.querySelector('.faq-icon');
+            
+            // Close all others
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== element) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-content').classList.add('hidden');
+                    item.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // Toggle current
+            element.classList.toggle('active');
+            content.classList.toggle('hidden');
+            icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        // Video placeholder
+        function playVideo() {
+            alert('Vídeo de demonstração será carregado aqui! 🎥');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Chat simulation
+        const chatMessages = [
+            "Olá! Vi que você se interessou pelo apartamento. Posso ajudar?",
+            "Qual o valor da entrada?",
+            "A entrada é de 20%. Posso calcular o financiamento para você?",
+            "Pode sim!",
+            "Perfeito! Com base no seu perfil, o valor da parcela ficaria em R$ 2.400. Posso agendar uma visita?",
+            "Pode ser amanhã às 14h?",
+            "Confirmado! Enviei os detalhes no seu email. Até lá! 🏠"
+        ];
+
+        let messageIndex = 0;
+        setInterval(() => {
+            // Simple chat animation logic could go here
+        }, 3000);
+    </script>
+</body>
+</html>
