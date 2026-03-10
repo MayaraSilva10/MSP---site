@@ -242,3 +242,9 @@ pids/
 # Temporary folders
 tmp/
 temp/
+
+# remove do cache arquivos que agora estão no Gitignore
+
+git rm -r --cached .
+git add .
+git commit -m "Aplicado .gitignore e removidos arquivos desnecessários"
