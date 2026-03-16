@@ -17,6 +17,25 @@
         </div>
     </section>
     
+    .hero-container {
+        display: flex;              /* Ativa o modo de colunas lado a lado */
+        align-items: center;        /* Alinha texto e robô na mesma altura central */
+        justify-content: space-around; /* Distribui o espaço entre eles */
+        min-height: 80vh;           /* Faz o hero ocupar quase a tela toda */
+        padding: 0 10%;             /* Dá respiro nas laterais */
+        flex-wrap: wrap;            /* Se for celular, o robô vai para baixo do texto */
+    }
+    
+    .hero-content {
+        flex: 1;                    /* Faz o texto ocupar espaço proporcional */
+        max-width: 600px;
+    }
+    
+    .hero-image {
+        flex: 1;                    /* Faz a imagem ocupar espaço proporcional */
+        display: flex;
+        justify-content: center;
+    }
         <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
