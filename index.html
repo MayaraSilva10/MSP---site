@@ -1132,9 +1132,27 @@ aria-label="Contato via WhatsApp">
  <span class="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75 animate-ping group-hover:hidden"></span>
  
  <i data-lucide="message-circle" class="relative w-7 h-7 fill-current"></i>
+
+ <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Garante que o ícone seja desenhado assim que o HTML carregar
+      document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+      });
+    </script>
+
+    <style>
+        /* Força o preenchimento interno do ícone para parecer o logo oficial */
+        [data-lucide="message-circle"] {
+            fill: white; 
+            stroke: white;
+            stroke-width: 2px;
+        }
+    </style>
  
  <span class="absolute right-16 bg-white text-gray-800 text-xs font-bold px-3 py-2 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none border border-gray-100">
      Fale conosco!
+
  </span>
 </a>
 </body>
